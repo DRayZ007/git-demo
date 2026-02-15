@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>基础网页界面</title>
+    <style>
+        :root{--bg:#f7f9fc;--card:#fff;--accent:#2563eb;--muted:#6b7280}
+        *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue","Noto Sans",Arial; background:var(--bg); color:#0f172a; -webkit-font-smoothing:antialiased}
+        header{background:linear-gradient(90deg,#fff 0,#f8fafc 100%);border-bottom:1px solid #e6eef8;position:sticky;top:0;z-index:10}
+        .container{max-width:1000px;margin:0 auto;padding:1rem}
+        .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+        .brand{font-weight:700;color:var(--accent);letter-spacing:.2px}
+        nav ul{display:flex;gap:.75rem;list-style:none;margin:0;padding:0}
+        nav a{color:var(--muted);text-decoration:none;padding:.45rem .6rem;border-radius:6px;font-size:.95rem}
+        nav a:hover{background:#eef6ff;color:var(--accent)}
+        .menu-btn{display:none;background:transparent;border:0;font-size:1.25rem}
+        main{padding:2rem 1rem}
+        .hero{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;background:linear-gradient(180deg,rgba(37,99,235,0.05),transparent);padding:1.5rem;border-radius:12px}
+        .hero h1{margin:.25rem 0;font-size:1.6rem}
+        .hero p{margin:0;color:var(--muted)}
+        .controls{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+        .btn{background:var(--accent);color:#fff;border:0;padding:.6rem 1rem;border-radius:8px;cursor:pointer}
+        .btn.secondary{background:#fff;color:var(--accent);border:1px solid #dbeafe}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+        .card{background:var(--card);padding:1rem;border-radius:10px;box-shadow:0 1px 2px rgba(15,23,42,0.04)}
+        footer{padding:1rem 0;color:var(--muted);text-align:center;font-size:.9rem}
+        @media (max-width:700px){
+            .menu-btn{display:block}
+            nav ul{display:none}
+            header.open nav ul{display:flex;flex-direction:column;background:transparent;padding-top:.5rem}
+        }
+    </style>
+</head>
+<body>
+    <header id="siteHeader">
+        <div class="container nav">
+            <div class="brand">示例网页</div>
+            <button class="menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home" class="hero">
+            <div>
+                <h1>欢迎使用基础网页界面</h1>
+                <p>这是一个简单、响应式的起始模板，包含导航、卡片布局和联系表单，便于快速开发和自定义。</p>
+                <div class="controls">
+                    <button class="btn" onclick="alert('开始')">开始</button>
+                    <button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">查看功能</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" style="margin-top:1.25rem">
+            <h2 style="margin:.25rem 0">功能</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 style="margin:.25rem 0">响应式布局</h3>
+                    <p style="margin:0;color:var(--muted)">在不同屏幕下自动适配，适合移动端和桌面端。</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin:.25rem 0">可定制样式</h3>
+                    <p style="margin:0;color:var(--muted)">使用 CSS 变量和简单类，方便主题和配色调整。</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin:.25rem 0">轻量交互</h3>
+                    <p style="margin:0;color:var(--muted)">包含最小的 JavaScript 用于菜单和滚动行为。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="margin-top:1.25rem">
+            <h2 style="margin:.25rem 0">联系</h2>
+            <div class="card" style="max-width:540px">
+                <form onsubmit="handleSubmit(event)">
+                    <label style="display:block;margin:.5rem 0 .25rem">姓名</label>
+                    <input type="text" id="name" required style="width:100%;padding:.5rem;border:1px solid #e6eef8;border-radius:6px" />
+                    <label style="display:block;margin:.5rem 0 .25rem">邮箱</label>
+                    <input type="email" id="email" required style="width:100%;padding:.5rem;border:1px solid #e6eef8;border-radius:6px" />
+                    <label style="display:block;margin:.5rem 0 .25rem">消息</label>
+                    <textarea id="message" rows="4" style="width:100%;padding:.5rem;border:1px solid #e6eef8;border-radius:6px"></textarea>
+                    <div style="margin-top:.75rem">
+                        <button class="btn" type="submit">发送</button>
+                        <button class="btn secondary" type="button" onclick="document.querySelector('form').reset()">重置</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">© 2026 示例网页 · 简洁起始模板</div>
+    </footer>
+
+    <script>
+        // 简单菜单与表单示例
+        const header = document.getElementById('siteHeader');
+        document.getElementById('menuBtn').addEventListener('click', ()=> header.classList.toggle('open'));
+        function handleSubmit(e){
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            alert('已发送：' + (name || '匿名'));
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
